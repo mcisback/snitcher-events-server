@@ -69,13 +69,13 @@ func (q *QManager) DelQ(name string) {
 func (q *QManager) AddSubscriber(qName string, sub *qs.QSubscriber) {
 	q.Qmap[qName].subscribers = append(q.Qmap[qName].subscribers, sub)
 
-	fmt.Printf("[%s] Added subscriber %s", qName, sub.Name)
+	fmt.Printf("[%s] Added subscriber %s\n", qName, sub.Name)
 }
 
 // Check for new events in queue and notify all subscribers
 func (n *QManagerNode) LoopNotify() {
 	for {
-		// message := <-*n.queue.channel
+		message := <-n.queue.Channel
 
 		if n.queue.Size() <= 0 {
 			fmt.Println("No Messages in queue: ", n.name)
@@ -85,17 +85,21 @@ func (n *QManagerNode) LoopNotify() {
 			continue
 		}
 
-		for {
-			message := n.queue.Next()
-
-			if message == nil {
-				break
-			}
-
-			for _, sub := range n.subscribers {
-				sub.Notify(message)
-			}
+		for _, sub := range n.subscribers {
+			go sub.Notify(message)
 		}
+
+		// for {
+		// 	message := n.queue.Next()
+
+		// 	if message == nil {
+		// 		break
+		// 	}
+
+		// 	for _, sub := range n.subscribers {
+		// 		sub.Notify(message)
+		// 	}
+		// }
 
 	}
 }

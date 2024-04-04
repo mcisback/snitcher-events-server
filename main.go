@@ -29,5 +29,5 @@ func main() {
 	server.QManager.AddQ("JOB_QUEUE_1")
 	server.QManager.AddQ("JOB_QUEUE_2")
 
-	go server.Start(PORT)
+	server.Start(PORT)
 }
