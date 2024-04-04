@@ -1,35 +1,35 @@
 package queue
 
 type Message struct {
-	message string
-	data    any
+	Message string
+	Data    any
 }
 
 type Queue struct {
 	items   []Message
 	size    int
-	channel chan *Message
+	Channel chan *Message
 }
 
 func New() *Queue {
 	q := &Queue{}
 
-	q.channel = make(chan *Message)
+	q.Channel = make(chan *Message)
 
 	return q
 }
 
 func (q *Queue) Add(message string, data any) {
 	newMessage := &Message{
-		message: message,
-		data:    data,
+		Message: message,
+		Data:    data,
 	}
 
 	q.items = append(q.items, *newMessage)
 
 	q.size++
 
-	q.channel <- newMessage
+	q.Channel <- newMessage
 }
 
 func (q *Queue) Next() *Message {

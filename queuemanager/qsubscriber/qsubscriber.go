@@ -1,6 +1,7 @@
 package qsubscriber
 
 import (
+	"fmt"
 	"net"
 
 	"github.com/mcisback/snitcher-events-server/queue"
@@ -20,4 +21,5 @@ func (sub *QSubscriber) Notify(msg *queue.Message) {
 	// }
 
 	// TODO: Send to socket
+	fmt.Printf("Notifing %s (%s) of %s", sub.Name, sub.RemoteAddr, msg.Message)
 }
