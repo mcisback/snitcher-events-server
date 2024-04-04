@@ -1,0 +1,10 @@
+{
+    "cmd": "SNITCH",
+    "payload": {
+        "queue": "JOB_QUEUE_1",
+        "message": "EMAIL_SENT",
+        "data": {
+            "email": "info@emailblablabla.com"
+        }
+    }
+}

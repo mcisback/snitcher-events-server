@@ -1,0 +1,7 @@
+{
+    "cmd": "SUBSCRIBE",
+    "payload": {
+        "queue": "JOB_QUEUE_1",
+        "clientName": "Netcat client 2"
+    }
+}
